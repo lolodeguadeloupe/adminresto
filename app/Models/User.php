@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_restaurateur',
     ];
 
     /**
@@ -42,6 +43,12 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_restaurateur' => 'boolean',
         ];
+    }
+
+    public function restaurants(): HasMany
+    {
+        return $this->hasMany(Restaurant::class);
     }
 }

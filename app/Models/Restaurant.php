@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Restaurant extends Model
 {
@@ -41,5 +42,16 @@ class Restaurant extends Model
     public function openingHours(): HasMany
     {
         return $this->hasMany(OpeningHour::class);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('user_restaurants', function (Builder $builder) {
+            if (!auth()->user()->isAdmin()) {  // Si l'utilisateur est connecté
+                if (auth()->check()) {
+                    $builder->where('user_id', auth()->id());
+                }
+            }
+        });
     }
 }

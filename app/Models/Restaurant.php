@@ -47,7 +47,7 @@ class Restaurant extends Model
     protected static function booted()
     {
         static::addGlobalScope('user_restaurants', function (Builder $builder) {
-            if (!auth()->user()->isAdmin()) {  // Si l'utilisateur est connecté
+            if (!auth()->user()->isAdmin()) {
                 if (auth()->check()) {
                     $builder->where('user_id', auth()->id());
                 }

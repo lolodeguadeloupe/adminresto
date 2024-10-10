@@ -6,10 +6,12 @@ use Filament\Forms;
 use App\Models\User;
 use Filament\Tables;
 use Filament\Forms\Form;
+use Pages\ViewRestaurant;
 use App\Models\Restaurant;
 use Filament\Tables\Table;
 use App\Models\RestaurantType;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -95,4 +97,6 @@ class RestaurantResource extends Resource
             'edit' => Pages\EditRestaurant::route('/{record}/edit'),
         ];
     }
+    
+
 }

@@ -52,7 +52,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('name'),
+                TextColumn::make('name')->searchable(),
                 TextColumn::make('email'),
                 CheckboxColumn::make('is_admin')->disabled(),
                 CheckboxColumn::make('is_restaurateur')->disabled(),

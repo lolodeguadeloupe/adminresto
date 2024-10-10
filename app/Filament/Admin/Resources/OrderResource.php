@@ -54,6 +54,7 @@ class OrderResource extends Resource
             ->columns([
                 TextColumn::make('status'),
                 TextColumn::make('restaurant.name'),
+                TextColumn::make('restaurant.id')->sortable(),
                 TextColumn::make('user.name'),
                 TextColumn::make('total_amount'),
             ])

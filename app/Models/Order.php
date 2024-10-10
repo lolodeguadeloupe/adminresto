@@ -27,4 +27,13 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('user_restaurants', function (\Illuminate\Database\Eloquent\Builder $builder) {
+            if (auth()->check() && !auth()->user()->isAdmin()) {
+                $builder->whereIn('restaurant_id', auth()->user()->restaurants->pluck('id'));
+            }
+        });
+    }
 }

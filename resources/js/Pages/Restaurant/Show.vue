@@ -6,9 +6,15 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    menuList: {
+        type: Object,
+        required: true,
+    },
 });
 
-console.log(props.restaurant);
+console.log(props.menuList);
+console.log(props.restaurant.menu_categories); 
+
 </script>
 
 <template>
@@ -45,10 +51,6 @@ console.log(props.restaurant);
                                     <strong>Email:</strong>
                                     {{ props.restaurant.email }}
                                 </p>
-                                <Link :href="route('restaurants.show', props.restaurant.id)"
-                                    class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
-                                Voir
-                                </Link>
                             </div>
                         </div>
                         <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -56,24 +58,20 @@ console.log(props.restaurant);
                                 <h3 class="text-xl font-semibold mb-2">
                                     Menu
                                 </h3>
-                                <p class="text-gray-600 mb-2">
-                                    <strong>Catégories:</strong>
-                                <ul>
-                                    <li v-for="category in props.restaurant.menu_categories" :key="category.id">
+                                <ul v-for="category in menuList" :key="category.id">
+                                    <h2 class="text-xl font-semibold leading-tight text-gray-800">
                                         {{ category.name }}
-                                    </li>
+                                    </h2>
+                                    <ul>
+                                        <li v-for="item in category.items" :key="item.name">
+                                            {{ item.name }} - {{ item.price }}
+                                            <span v-if="item.available">Available</span>
+                                            <span v-else>Not Available</span>
+                                        </li>
+                                    </ul>
                                 </ul>
-                                </p>
-                                <p class="text-gray-600 mb-2">
-                                    <strong>Menus:</strong>
-                                <ul>
-                                    <li v-for="menu in props.restaurant.menu_items" :key="menu.id"
-                                        v-if="7 == menu.menu_category_id">
-                                        {{ menu.name }}
-                                    </li>
-                                </ul>
-                                </p>
                             </div>
+                            
                         </div>
 
                         <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -85,7 +83,8 @@ console.log(props.restaurant);
                                     <strong>Commandes:</strong>
                                 <ul>
                                     <li v-for="order in props.restaurant.orders" :key="order.id">
-                                        <span class="font-semibold">{{ order.total_amount }} €</span>
+                                        <span class="font-semibold mr-6">{{ order.total_amount }} €</span>
+                                        <span >{{ order.pickup_time }} </span>
                                     </li>
                                 </ul>
                                 </p>

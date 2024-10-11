@@ -17,6 +17,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Admin\Resources\OrderResource\Pages;
 use App\Filament\Admin\Resources\OrderResource\RelationManagers;
+use App\Filament\Admin\Resources\OrderResource\RelationManagers\OrderItemsRelationManager;
 use App\Filament\Admin\Resources\OrderResource\RelationManagers\RestaurantRelationManager;
 
 class OrderResource extends Resource
@@ -75,7 +76,8 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RestaurantRelationManager::class
+            RestaurantRelationManager::class,
+            OrderItemsRelationManager::class
         ];
     }
 

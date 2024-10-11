@@ -3,12 +3,14 @@
 namespace App\Filament\Admin\Resources\RestaurantResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\Restaurant;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class OrdersRelationManager extends RelationManager
 {
@@ -21,13 +23,14 @@ class OrdersRelationManager extends RelationManager
                 Forms\Components\TextInput::make('total_amount')
                     ->required()
                     ->maxLength(255)->readonly(),
-                    Forms\Components\Select::make('status')->options([
-                        'pending' => 'pending',
-                        'preparing' => 'preparing',
-                        'ready' => 'ready',
-                        'completed' => 'completed',
-                        'cancelled'=> 'cancelled',
-                    ])->default('pending'),
+                    // Forms\Components\Select::make('status')->options([
+                    //     'pending' => 'pending',
+                    //     'preparing' => 'preparing',
+                    //     'ready' => 'ready',
+                    //     'completed' => 'completed',
+                    //     'cancelled'=> 'cancelled',
+                    // ])->default('pending'),
+                    TextInput::make('status')->readonly(),
 
             ]);
     }
@@ -58,7 +61,7 @@ class OrdersRelationManager extends RelationManager
                 // Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

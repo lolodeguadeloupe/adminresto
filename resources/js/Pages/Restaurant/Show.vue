@@ -19,7 +19,7 @@ console.log(props.restaurant);
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                Dashboard
+                Dashboard 2
             </h2>
         </template>
 
@@ -65,18 +65,23 @@ console.log(props.restaurant);
                                 <p class="text-gray-600 mb-2">
                                     <strong>Catégories:</strong>
                                     <ul>
-                                        <li v-for="category in props.restaurant.menuCategories" :key="category.id">
+                                        <li v-for="category in props.restaurant.menu_categories" :key="category.id">
                                             {{ category.name }}
+                                            <!-- <ul>
+                                                <li v-for="menu in props.restaurant.menu_items" :key="menu.id" v-if="7 == menu.menu_category_id">
+                                                    {{ menu.name }}
+                                                </li>
+                                            </ul> -->
                                         </li>
                                     </ul>
                                 </p>
                                 <p class="text-gray-600 mb-2">
                                     <strong>Menus:</strong>
                                     <ul>
-                                        <li v-for="menu in props.restaurant.menuItems" :key="menu.id">
-                                            {{ menu.name }}
-                                        </li>
-                                    </ul>
+                                                <li v-for="menu in props.restaurant.menu_items" :key="menu.id" v-if="7 == menu.menu_category_id">
+                                                    {{ menu.name }}
+                                                </li>
+                                            </ul>
                                 </p>
                             </div>
                         </div>

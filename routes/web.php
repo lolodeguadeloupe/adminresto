@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
     Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
     Route::post('/restaurants/{restaurant}/orders', [RestaurantController::class, 'createOrder'])->name('restaurants.createOrder');
+    Route::get('/menu-list', [RestaurantController::class, 'listMenusByCategory'])->name('menu.list');
 });
 
 require __DIR__.'/auth.php';

@@ -31,4 +31,23 @@ class RestaurantController extends Controller
     {
         return Inertia::render('Restaurant/CreateOrder');
     }
+
+    public function listMenusByCategory()
+    {
+        $categories = MenuCategory::with('menuItems')->get();
+        $menuList = $categories->map(function ($category) {
+            return [
+                'name' => $category->name,
+                'items' => $category->menuItems->map(function ($item) {
+                    return [
+                        'name' => $item->name,
+                        'description' => $item->description,
+                        'price' => $item->price,
+                        'available' => $item->available,
+                    ];
+                }),
+            ];
+        });
+        return Inertia::render('MenuList', ['menuList' => $menuList]);
+    }
 }
